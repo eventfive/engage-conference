@@ -2595,9 +2595,6 @@ var engage;
             this._options.quality = 100;
             this._options.targetWidth = 1024;
             this._options.targetHeight = 768;
-            this._options.sourceType = navigator.camera.PictureSourceType.CAMERA;
-            this._options.destinationType = navigator.camera.DestinationType.FILE_URI;
-            this._options.encodingType = navigator.camera.EncodingType.JPEG;
             this._options.saveToPhotoAlbum = false;
             this._options.correctOrientation = true;
             this._options.cameraDirection = 1; //navigator.camera.Direction.FRONT;
@@ -2608,6 +2605,10 @@ var engage;
                 e5.display.Toast.show({ message: "Camera not found", key: "camera_not_found" });
                 return;
             }
+
+            this._options.sourceType = navigator.camera.PictureSourceType.CAMERA;
+            this._options.destinationType = navigator.camera.DestinationType.FILE_URI;
+            this._options.encodingType = navigator.camera.EncodingType.JPEG;
 
             navigator.camera.getPicture(function (img) {
                 return _this.handleCaptureSuccess(img);
@@ -2681,8 +2682,8 @@ var engage;
             var _this = this;
             this._camera = new engage.CameraUtil();
 
-            $("#button-submit").click(function () {
-                return _this.handleClickSubmit();
+            $("#user-form").submit(function (e) {
+                return _this.handleClickSubmit(e);
             });
             this._camera.onUploadSuccess.add(this.handleUploadSuccess, this);
             this._camera.onCaptureSuccess.add(this.handleCaptureSuccess, this);
@@ -2710,12 +2711,15 @@ var engage;
             this._camera.capture();
         };
 
-        EngageConferenceApp.prototype.handleClickSubmit = function () {
+        EngageConferenceApp.prototype.handleClickSubmit = function (e) {
+            e.preventDefault();
+
             //var latOfSlo:number = 0;
             //var lngOfSlo:number = 0;
             //this._camera.upload($("#input-name").val(), $("#input-comment").val(), latOfSlo, lngOfSlo);
             //FOR TEST ONLY
             this._camera.capture();
+            return false;
         };
         return EngageConferenceApp;
     })();
