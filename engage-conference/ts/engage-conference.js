@@ -2685,18 +2685,18 @@ var engage;
 (function (engage) {
     var EngageConferenceApp = (function () {
         function EngageConferenceApp() {
+            var _this = this;
             $("#content").text("HELLO AGAIN");
 
             this._camera = new engage.CameraUtil();
 
             document["ontouchmov" + "e"] = function (event) {
-                var _this = this;
                 event.preventDefault();
-
-                $("body").bind("click", function () {
-                    return _this.handleClickBody();
-                });
             };
+
+            $("body").bind("click", function () {
+                return _this.handleClickBody();
+            });
         }
         EngageConferenceApp.prototype.handleClickBody = function () {
             this._camera.capture();
