@@ -2636,10 +2636,12 @@ var engage;
             this.capture();
         };
 
-        CameraUtil.prototype.upload = function (url, name, comment, latitude, longitude) {
+        CameraUtil.prototype.upload = function (name, comment, latitude, longitude) {
             var _this = this;
             e5.display.Toast.show({ message: "Upload data... please wait" });
 
+            //"/eventfive/web/engage-app/php/upload.php"
+            var url = "http://engage-interreg.eu/engage-app/upload.php";
             var imageURI = this.imageURI;
 
             var params = new Object();
@@ -2687,19 +2689,42 @@ var engage;
     var EngageConferenceApp = (function () {
         function EngageConferenceApp() {
             var _this = this;
-            $("#content").text("CLICK ME");
-
             this._camera = new engage.CameraUtil();
 
-            document["ontouchmov" + "e"] = function (event) {
-                event.preventDefault();
+            $("#button-submit").click(function () {
+                return _this.handleClickSubmit();
+            });
+            this._camera.onUploadSuccess.add(this.handleUploadSuccess, this);
+            this._camera.onCaptureSuccess.add(this.handleCaptureSuccess, this);
+            document["ontouchmov" + "e"] = function (e) {
+                e.preventDefault();
             };
 
-            $("#content").click(function () {
-                return _this.handleClickBody();
-            });
+            //open camera after device is ready
+            var w = window;
+            if (w.isDeviceReady) {
+                this._camera.capture();
+            } else {
+                window.addEventListener("deviceready", function () {
+                    return _this._camera.capture();
+                });
+            }
         }
-        EngageConferenceApp.prototype.handleClickBody = function () {
+        EngageConferenceApp.prototype.handleCaptureSuccess = function () {
+            $("#input-name").focus();
+        };
+
+        EngageConferenceApp.prototype.handleUploadSuccess = function () {
+            $("#input-name").val("");
+            $("#input-comment").val("");
+            this._camera.capture();
+        };
+
+        EngageConferenceApp.prototype.handleClickSubmit = function () {
+            //var latOfSlo:number = 0;
+            //var lngOfSlo:number = 0;
+            //this._camera.upload($("#input-name").val(), $("#input-comment").val(), latOfSlo, lngOfSlo);
+            //FOR TEST ONLY
             this._camera.capture();
         };
         return EngageConferenceApp;
