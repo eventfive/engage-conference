@@ -31,7 +31,7 @@
         <!-- <preference name="auto-hide-splash-screen" value="false" /> -->
         <preference name="splash-screen-duration" value="2000" />
 
-        <preference name="phonegap-version" value="3.3.0" />
+        <preference name="phonegap-version" value="3.5.0" />
         <preference name="stay-in-webview" value="true" />
 
         <gap:plugin name="org.apache.cordova.device" />
