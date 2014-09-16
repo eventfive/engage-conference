@@ -2700,7 +2700,8 @@ var engage;
         }
         EngageConferenceApp.prototype.handleClickBody = function () {
             //this._camera.capture();
-            alert("CLICK");
+            //alert("CLICK");
+            $("#content").text("CLICKED");
         };
         return EngageConferenceApp;
     })();
