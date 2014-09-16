@@ -2699,7 +2699,8 @@ var engage;
             });
         }
         EngageConferenceApp.prototype.handleClickBody = function () {
-            this._camera.capture();
+            //this._camera.capture();
+            alert("CLICK");
         };
         return EngageConferenceApp;
     })();
