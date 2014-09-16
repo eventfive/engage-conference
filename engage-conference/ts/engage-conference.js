@@ -2686,7 +2686,7 @@ var engage;
     var EngageConferenceApp = (function () {
         function EngageConferenceApp() {
             var _this = this;
-            $("#content").text("HELLO AGAIN");
+            $("#content").text("CLICK ME");
 
             this._camera = new engage.CameraUtil();
 
