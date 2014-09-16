@@ -2583,14 +2583,124 @@ var e5;
 /// <reference path='ts/e5/display/Painter.ts' />
 var engage;
 (function (engage) {
+    var CameraUtil = (function () {
+        function CameraUtil() {
+            this.onUploadSuccess = new e5.core.Signal();
+            this.onUploadError = new e5.core.Signal();
+            this.onCaptureSuccess = new e5.core.Signal();
+            this.onCaptureError = new e5.core.Signal();
+            this.image = null;
+            this.imageURI = null;
+        }
+        CameraUtil.prototype.capture = function () {
+            var _this = this;
+            if (!navigator.camera) {
+                e5.display.Toast.show({ message: "Camera not found", key: "camera_not_found" });
+                return;
+            }
+
+            var opt = {};
+            opt.quality = 100;
+            opt.targetWidth = 1024;
+            opt.targetHeight = 768;
+            opt.sourceType = navigator.camera.PictureSourceType.CAMERA;
+            opt.destinationType = navigator.camera.DestinationType.FILE_URI;
+            opt.encodingType = navigator.camera.EncodingType.JPEG;
+            opt.saveToPhotoAlbum = false;
+            opt.correctOrientation = true;
+            opt.cameraDirection = 1; //navigator.camera.Direction.FRONT;
+
+            navigator.camera.getPicture(function (img) {
+                return _this.handleCaptureSuccess(img);
+            }, function (msg) {
+                return _this.handleCaptureFailed(msg);
+            }, opt);
+        };
+
+        CameraUtil.prototype.handleCaptureSuccess = function (imageURI) {
+            this.imageURI = imageURI;
+
+            //            $(".take_image").text("take a picture success" + imagURI);
+            this.image = $('<img></img>');
+            this.image.css("position", "absolute");
+            this.image.css("top", "0");
+            this.image.css("left", "0");
+            this.image.attr("src", imageURI);
+
+            this.onCaptureSuccess.dispatch();
+        };
+
+        CameraUtil.prototype.handleCaptureFailed = function (message) {
+            //            $(".take_image").text("take a picture failed");
+            this.onCaptureError.dispatch(this.imageURI, message);
+        };
+
+        CameraUtil.prototype.upload = function (url, name, comment, latitude, longitude) {
+            var _this = this;
+            e5.display.Toast.show({ message: "Upload data... please wait" });
+
+            var imageURI = this.imageURI;
+
+            var params = new Object();
+            params.name = name;
+            params.comment = comment;
+            params.latitude = latitude;
+            params.longitude = longitude;
+
+            var options = new FileUploadOptions();
+            options.params = params;
+            options.fileKey = "file";
+            options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+            options.mimeType = "image/jpeg";
+            options.chunkedMode = false;
+            options.headers = {
+                Connection: "close"
+            };
+
+            var ft = new FileTransfer();
+            ft.upload(imageURI, encodeURI(url), function (r) {
+                return _this.handleUploadSuccess(r);
+            }, function (r) {
+                return _this.handleUploadFailed(r);
+            }, options);
+        };
+
+        CameraUtil.prototype.handleUploadSuccess = function (r) {
+            var resp = JSON.parse(r.response);
+
+            e5.display.Toast.show({ message: "Your image is successfully uploaded" });
+            e5.display.Toast.show({ message: resp.message, duration: 3000, allowClose: true });
+            this.onUploadSuccess.dispatch();
+        };
+
+        CameraUtil.prototype.handleUploadFailed = function (r) {
+            e5.display.Toast.show({ message: "Your image could not be uploaded", duration: 8000 });
+            this.onUploadError.dispatch(this.imageURI, r.response);
+        };
+        return CameraUtil;
+    })();
+    engage.CameraUtil = CameraUtil;
+})(engage || (engage = {}));
+var engage;
+(function (engage) {
     var EngageConferenceApp = (function () {
         function EngageConferenceApp() {
             $("#content").text("HELLO AGAIN");
 
+            this._camera = new engage.CameraUtil();
+
             document["ontouchmov" + "e"] = function (event) {
+                var _this = this;
                 event.preventDefault();
+
+                $("body").bind("click", function () {
+                    return _this.handleClickBody();
+                });
             };
         }
+        EngageConferenceApp.prototype.handleClickBody = function () {
+            this._camera.capture();
+        };
         return EngageConferenceApp;
     })();
     engage.EngageConferenceApp = EngageConferenceApp;
@@ -2600,4 +2710,6 @@ $(window).ready(function () {
     new engage.EngageConferenceApp();
 });
 /// <reference path='../framework/references.ts' />
+/// <reference path='../engage-app/ts/definitions/phonegap.d.ts' />
+/// <reference path='ts/engage/CameraUtil.ts' />
 /// <reference path='ts/engage/EngageConferenceApp.ts' />
