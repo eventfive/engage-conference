@@ -2591,6 +2591,16 @@ var engage;
             this.onCaptureError = new e5.core.Signal();
             this.image = null;
             this.imageURI = null;
+            this._options = {};
+            this._options.quality = 100;
+            this._options.targetWidth = 1024;
+            this._options.targetHeight = 768;
+            this._options.sourceType = navigator.camera.PictureSourceType.CAMERA;
+            this._options.destinationType = navigator.camera.DestinationType.FILE_URI;
+            this._options.encodingType = navigator.camera.EncodingType.JPEG;
+            this._options.saveToPhotoAlbum = false;
+            this._options.correctOrientation = true;
+            this._options.cameraDirection = 1; //navigator.camera.Direction.FRONT;
         }
         CameraUtil.prototype.capture = function () {
             var _this = this;
@@ -2599,39 +2609,19 @@ var engage;
                 return;
             }
 
-            var opt = {};
-            opt.quality = 100;
-            opt.targetWidth = 1024;
-            opt.targetHeight = 768;
-            opt.sourceType = navigator.camera.PictureSourceType.CAMERA;
-            opt.destinationType = navigator.camera.DestinationType.FILE_URI;
-            opt.encodingType = navigator.camera.EncodingType.JPEG;
-            opt.saveToPhotoAlbum = false;
-            opt.correctOrientation = true;
-            opt.cameraDirection = 1; //navigator.camera.Direction.FRONT;
-
             navigator.camera.getPicture(function (img) {
                 return _this.handleCaptureSuccess(img);
             }, function (msg) {
                 return _this.handleCaptureFailed(msg);
-            }, opt);
+            }, this._options);
         };
 
         CameraUtil.prototype.handleCaptureSuccess = function (imageURI) {
             this.imageURI = imageURI;
-
-            //            $(".take_image").text("take a picture success" + imagURI);
-            this.image = $('<img></img>');
-            this.image.css("position", "absolute");
-            this.image.css("top", "0");
-            this.image.css("left", "0");
-            this.image.attr("src", imageURI);
-
             this.onCaptureSuccess.dispatch();
         };
 
         CameraUtil.prototype.handleCaptureFailed = function (message) {
-            //            $(".take_image").text("take a picture failed");
             this.onCaptureError.dispatch(this.imageURI, message);
             this.capture();
         };
