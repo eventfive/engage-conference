@@ -2690,18 +2690,19 @@ var engage;
 
             this._camera = new engage.CameraUtil();
 
-            document["ontouchmov" + "e"] = function (event) {
-                event.preventDefault();
-            };
-
-            $("body").bind("click", function () {
+            //            document["ontouchmov" + "e"] = function(event) {
+            //                event.preventDefault();
+            //            }
+            $("#content").click(function () {
                 return _this.handleClickBody();
             });
+            //window.document.body.onmousedown = () => this.handleClickBody();
         }
         EngageConferenceApp.prototype.handleClickBody = function () {
-            //this._camera.capture();
+            this._camera.capture();
+            //alert("HH");
             //alert("CLICK");
-            $("#content").text("CLICKED");
+            //$("#content").text("CLICKED");
         };
         return EngageConferenceApp;
     })();
