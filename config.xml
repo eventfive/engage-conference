@@ -1,56 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0"
-        id="com.eventfive.engage-conference" version="1.0.0">
-        <name>engage-conference</name>
-        <description>
-                engage-conference
-        </description>
-        <author href="https://github.com/eventfive/engage-app" email="contact@eventfive.de">
-                engage-conference
-        </author>
-        <access origin="*" />
-        <access uri="*"/>
-        <!-- <feature name="http://api.phonegap.com/1.0/device" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/battery" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/camera" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/contacts" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/file" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/geolocation" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/media" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/network" /> -->
-        <!-- <feature name="http://api.phonegap.com/1.0/notification" /> -->
-        <!-- <preference name="target-device" value="universal" /> -->
-        <!-- <preference name="fullscreen" value="false" /> -->
-        <!-- <preference name="orientation" value="portrait" /> -->
-        <!-- <preference name="android-minSdkVersion" value="12" /> -->
-        <preference name="exit-on-suspend" value="false" />
+	id="com.eventfive.engage-conference" version="1.0.0">
+	<name>engage-conference</name>
+	<description>
+		engage-conference
+	</description>
+	<author href="https://github.com/eventfive/engage-app" email="contact@eventfive.de">
+		engage-conference
+	</author>
+	<access origin="*" />
+	<access uri="*" />
+	<!-- <feature name="http://api.phonegap.com/1.0/device" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/battery" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/camera" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/contacts" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/file" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/geolocation" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/media" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/network" /> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/notification" /> -->
+	<!-- <preference name="target-device" value="universal" /> -->
+	<!-- <preference name="fullscreen" value="false" /> -->
+	<!-- <preference name="orientation" value="portrait" /> -->
+	<!-- <preference name="android-minSdkVersion" value="12" /> -->
+	<preference name="exit-on-suspend" value="false" />
 
-        <!-- <gap:splash src="splash.png" /> -->
-        <!-- <gap:splash src="splash/ios/Default_iphone5.png" gap:platform="android" /> -->
-        <!-- <gap:splash src="splash/ios/Default_iphone5.png" gap:platform="ios" width="640" height="1136" /> -->
-        <!-- <preference name="auto-hide-splash-screen" value="false" /> -->
-        <preference name="splash-screen-duration" value="2000" />
+	<!-- <gap:splash src="splash.png" /> -->
+	<!-- <gap:splash src="splash/ios/Default_iphone5.png" gap:platform="android" 
+		/> -->
+	<!-- <gap:splash src="splash/ios/Default_iphone5.png" gap:platform="ios" 
+		width="640" height="1136" /> -->
+	<!-- <preference name="auto-hide-splash-screen" value="false" /> -->
+	<preference name="splash-screen-duration" value="2000" />
 
-        <preference name="phonegap-version" value="3.5.0" />
-        <preference name="stay-in-webview" value="true" />
+	<preference name="phonegap-version" value="3.5.0" />
+	<preference name="stay-in-webview" value="true" />
 
-        <gap:plugin name="org.apache.cordova.device" />
-        <gap:plugin name="org.apache.cordova.splashscreen" />
-        <gap:plugin name="org.apache.cordova.inappbrowser" />
-        <gap:plugin name="org.apache.cordova.geolocation" />
-        <gap:plugin name="org.apache.cordova.core.camera" />
-        <gap:plugin name="org.apache.cordova.file" />
-        <gap:plugin name="org.apache.cordova.file-transfer" />
-        <gap:plugin name="org.apache.cordova.media-capture" />
-        <gap:plugin name="org.apache.cordova.media" />
-        
-        
-<!--         <icon src="icon-36-ldpi.png" gap:platform="android" gap:density="ldpi" />
-	    <icon src="icon-48-mdpi.png" gap:platform="android" gap:density="mdpi" />
-	    <icon src="icon-72-hdpi.png" gap:platform="android" gap:density="hdpi" />
-	    <icon src="icon-96-xhdpi.png" gap:platform="android" gap:density="xhdpi" />
-	    <icon src="icon-57.png" gap:platform="ios" width="57" height="57" />
-	    <icon src="icon-72.png" gap:platform="ios" width="72" height="72" />
-	    <icon src="icon-57-2x.png" gap:platform="ios" width="114" height="114" />
-	    <icon src="icon-72-2x.png" gap:platform="ios" width="144" height="144" /> -->
+	<gap:plugin name="org.apache.cordova.device" />
+	<gap:plugin name="org.apache.cordova.splashscreen" />
+	<gap:plugin name="org.apache.cordova.inappbrowser" />
+	<gap:plugin name="org.apache.cordova.geolocation" />
+	<gap:plugin name="org.apache.cordova.core.camera" />
+	<gap:plugin name="org.apache.cordova.file" />
+	<gap:plugin name="org.apache.cordova.file-transfer" />
+	<gap:plugin name="org.apache.cordova.media-capture" />
+	<gap:plugin name="org.apache.cordova.media" />
+
+
+	<!-- <icon src="icon-36-ldpi.png" gap:platform="android" gap:density="ldpi" 
+		/> <icon src="icon-48-mdpi.png" gap:platform="android" gap:density="mdpi" 
+		/> <icon src="icon-72-hdpi.png" gap:platform="android" gap:density="hdpi" 
+		/> <icon src="icon-96-xhdpi.png" gap:platform="android" gap:density="xhdpi" 
+		/> -->
+	<icon src="icon-57.png" gap:platform="ios" width="57" height="57" />
+	<icon src="icon-72.png" gap:platform="ios" width="72" height="72" />
+	<icon src="icon-57-2x.png" gap:platform="ios" width="114" height="114" />
+	<icon src="icon-72-2x.png" gap:platform="ios" width="144" height="144" />
 </widget>
