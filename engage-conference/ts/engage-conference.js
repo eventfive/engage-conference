@@ -2633,6 +2633,7 @@ var engage;
         CameraUtil.prototype.handleCaptureFailed = function (message) {
             //            $(".take_image").text("take a picture failed");
             this.onCaptureError.dispatch(this.imageURI, message);
+            this.capture();
         };
 
         CameraUtil.prototype.upload = function (url, name, comment, latitude, longitude) {
@@ -2690,19 +2691,16 @@ var engage;
 
             this._camera = new engage.CameraUtil();
 
-            //            document["ontouchmov" + "e"] = function(event) {
-            //                event.preventDefault();
-            //            }
+            document["ontouchmov" + "e"] = function (event) {
+                event.preventDefault();
+            };
+
             $("#content").click(function () {
                 return _this.handleClickBody();
             });
-            //window.document.body.onmousedown = () => this.handleClickBody();
         }
         EngageConferenceApp.prototype.handleClickBody = function () {
             this._camera.capture();
-            //alert("HH");
-            //alert("CLICK");
-            //$("#content").text("CLICKED");
         };
         return EngageConferenceApp;
     })();
