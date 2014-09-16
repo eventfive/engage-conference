@@ -2585,7 +2585,11 @@ var engage;
 (function (engage) {
     var EngageConferenceApp = (function () {
         function EngageConferenceApp() {
-            alert("HELLO WORLD");
+            $("#content").text("HELLO AGAIN");
+
+            document["ontouchmov" + "e"] = function (event) {
+                event.preventDefault();
+            };
         }
         return EngageConferenceApp;
     })();
