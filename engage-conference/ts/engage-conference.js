@@ -2745,7 +2745,7 @@ var engage;
             $("#input-comment").val("");
             setTimeout(function () {
                 return _this.restartCapture();
-            }, 3000);
+            }, 5000);
         };
 
         EngageConferenceApp.prototype.restartCapture = function () {
