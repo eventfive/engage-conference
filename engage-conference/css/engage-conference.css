@@ -430,6 +430,10 @@ body.progress:after {
   background-repeat: no-repeat;
 }
 
-body.progress * {
+body.progress #button-submit,
+body.progress #button-cancel,
+body.progress #input-name,
+body.progress #input-comment,
+body.progress #logo {
   display: none;
 }
