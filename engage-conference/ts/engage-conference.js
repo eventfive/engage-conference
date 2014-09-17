@@ -2649,9 +2649,8 @@ var engage;
             params.latitude = latitude;
             params.longitude = longitude;
 
-            alert(FileUploadOptions);
-            return;
-
+            //            alert(FileUploadOptions);
+            //            return;
             var options = new FileUploadOptions();
             options.params = params;
             options.fileKey = "file";
@@ -2668,6 +2667,7 @@ var engage;
             }, function (r) {
                 return _this.handleUploadFailed(r);
             }, options);
+            e5.display.Toast.show({ message: "File ready..." });
         };
 
         CameraUtil.prototype.handleUploadSuccess = function (r) {
