@@ -2623,8 +2623,13 @@ var engage;
         };
 
         CameraUtil.prototype.handleCaptureFailed = function (message) {
+            var _this = this;
             this.onCaptureError.dispatch(this.imageURI, message);
-            this.capture();
+
+            setTimeout(function () {
+                return _this.capture();
+            }, 500);
+            //this.capture();
         };
 
         CameraUtil.prototype.upload = function (name, comment, latitude, longitude) {
