@@ -2662,13 +2662,21 @@ var engage;
             };
 
             var ft = new FileTransfer();
-            ft.upload('', encodeURI(url), null, null, null);
+
+            //            ft.upload('', encodeURI(url), null, null, null);
+            ft.onprogress = function (e) {
+                return _this.onProgress(e);
+            };
             ft.upload(imageURI, encodeURI(url), function (r) {
                 return _this.handleUploadSuccess(r);
             }, function (r) {
                 return _this.handleUploadFailed(r);
             }, options);
             e5.display.Toast.show({ message: "File ready..." });
+        };
+
+        CameraUtil.prototype.onProgress = function (e) {
+            e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total });
         };
 
         CameraUtil.prototype.handleUploadSuccess = function (r) {
