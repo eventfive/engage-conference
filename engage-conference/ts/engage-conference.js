@@ -2649,6 +2649,9 @@ var engage;
             params.latitude = latitude;
             params.longitude = longitude;
 
+            alert(FileUploadOptions);
+            return;
+
             var options = new FileUploadOptions();
             options.params = params;
             options.fileKey = "file";
