@@ -2636,7 +2636,7 @@ var engage;
 
         CameraUtil.prototype.upload = function (name, comment, latitude, longitude) {
             var _this = this;
-            e5.display.Toast.show({ message: "Upload data... please wait" });
+            e5.display.Toast.show({ message: "Upload data... please wait", duration: 2000 });
 
             //"/eventfive/web/engage-app/php/upload.php"
             //"http://192.168.1.26/eventfive/web/engage-app/php/upload.php"
