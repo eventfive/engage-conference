@@ -2710,7 +2710,7 @@ var engage;
             setTimeout(function () {
                 return _this._camera.capture();
             }, 2000);
-            $("body").addClass("progress");
+            //            $("body").addClass("progress");
         }
         EngageConferenceApp.prototype.handleCaptureSuccess = function () {
             $("#input-name").focus();
