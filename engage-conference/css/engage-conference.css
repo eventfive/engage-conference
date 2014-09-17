@@ -429,3 +429,7 @@ body.progress:after {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+body.progress * {
+  display: none;
+}
