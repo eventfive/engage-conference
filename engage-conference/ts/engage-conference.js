@@ -2694,6 +2694,7 @@ var engage;
                 return _this.handleClickSubmit(e);
             });
             this._camera.onUploadSuccess.add(this.handleUploadSuccess, this);
+            this._camera.onUploadError.add(this.handleUploadError, this);
             this._camera.onCaptureSuccess.add(this.handleCaptureSuccess, this);
             document["ontouchmov" + "e"] = function (e) {
                 e.preventDefault();
@@ -2705,7 +2706,7 @@ var engage;
             //                this._camera.capture();
             //            }
             //            else {
-            //                window.addEventListener("deviceready", () => this._camera.capture());
+            //                windistener("deviceready", () => this._camera.capture());
             //            }
             setTimeout(function () {
                 return _this._camera.capture();
@@ -2721,6 +2722,10 @@ var engage;
             $("#input-comment").val("");
             $("body").removeClass("progress");
             this._camera.capture();
+        };
+
+        EngageConferenceApp.prototype.handleUploadError = function () {
+            $("body").removeClass("progress");
         };
 
         EngageConferenceApp.prototype.handleClickSubmit = function (e) {
