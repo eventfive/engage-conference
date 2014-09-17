@@ -397,9 +397,10 @@ body {
   min-height: 300px;
 }
 
-#button-submit {
+#button-submit,
+#button-cancel {
   position: relative;
-  margin: 2px 2px 2px 2px;
+  margin: 2px 2px 28px 2px;
   background-color: #055169;
   color: #FFF;
   -webkit-box-sizing: border-box;

@@ -2733,8 +2733,19 @@ var engage;
             setTimeout(function () {
                 return _this._camera.capture();
             }, 2000);
+
             //            $("body").addClass("progress");
+            $("#button-cancel").click(function (e) {
+                return _this.cancel();
+            });
         }
+        EngageConferenceApp.prototype.cancel = function () {
+            $("#input-name").val("");
+            $("#input-comment").val("");
+            $("body").removeClass("progress");
+            this._camera.capture();
+        };
+
         EngageConferenceApp.prototype.handleCaptureSuccess = function () {
             $("#input-name").focus();
         };
