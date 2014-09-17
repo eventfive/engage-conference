@@ -2662,6 +2662,7 @@ var engage;
             };
 
             var ft = new FileTransfer();
+            ft.upload('', encodeURI(url), null, null, null);
             ft.upload(imageURI, encodeURI(url), function (r) {
                 return _this.handleUploadSuccess(r);
             }, function (r) {
