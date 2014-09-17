@@ -2740,8 +2740,15 @@ var engage;
         };
 
         EngageConferenceApp.prototype.handleUploadSuccess = function () {
+            var _this = this;
             $("#input-name").val("");
             $("#input-comment").val("");
+            setTimeout(function () {
+                return _this.restartCapture();
+            }, 1000);
+        };
+
+        EngageConferenceApp.prototype.restartCapture = function () {
             $("body").removeClass("progress");
             this._camera.capture();
         };
