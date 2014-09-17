@@ -2629,7 +2629,7 @@ var engage;
             e5.display.Toast.show({ message: "Try to capture again..." });
             setTimeout(function () {
                 return _this.capture();
-            }, 500);
+            }, 2000);
             //this.capture();
         };
 
