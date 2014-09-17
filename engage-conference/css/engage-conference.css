@@ -394,6 +394,11 @@ body {
   font-weight: bold;
 }
 
+body.progress {
+  background-color: #095168;
+  background-image: none;
+}
+
 body.progress:after {
   content: "";
   position: fixed;
