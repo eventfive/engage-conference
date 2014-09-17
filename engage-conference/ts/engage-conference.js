@@ -2638,7 +2638,9 @@ var engage;
             e5.display.Toast.show({ message: "Upload data... please wait" });
 
             //"/eventfive/web/engage-app/php/upload.php"
-            var url = "http://engage-interreg.eu/engage-app/upload.php";
+            //"http://192.168.1.26/eventfive/web/engage-app/php/upload.php"
+            //"http://engage-interreg.eu/engage-app/upload.php";
+            var url = "http://192.168.1.26/eventfive/web/engage-app/php/upload.php";
             var imageURI = this.imageURI;
 
             var params = new Object();
@@ -2697,15 +2699,18 @@ var engage;
                 e.preventDefault();
             };
 
-            //open camera after device is ready
-            var w = window;
-            if (w.isDeviceReady) {
-                this._camera.capture();
-            } else {
-                window.addEventListener("deviceready", function () {
-                    return _this._camera.capture();
-                });
-            }
+            //            //open camera after device is ready
+            //            var w: any = window;
+            //            if (w.isDeviceReady) {
+            //                this._camera.capture();
+            //            }
+            //            else {
+            //                window.addEventListener("deviceready", () => this._camera.capture());
+            //            }
+            setTimeout(function () {
+                return _this._camera.capture();
+            }, 2000);
+            $("body").addClass("progress");
         }
         EngageConferenceApp.prototype.handleCaptureSuccess = function () {
             $("#input-name").focus();
@@ -2714,17 +2719,21 @@ var engage;
         EngageConferenceApp.prototype.handleUploadSuccess = function () {
             $("#input-name").val("");
             $("#input-comment").val("");
+            $("body").removeClass("progress");
             this._camera.capture();
         };
 
         EngageConferenceApp.prototype.handleClickSubmit = function (e) {
             e.preventDefault();
 
-            //var latOfSlo:number = 0;
-            //var lngOfSlo:number = 0;
-            //this._camera.upload($("#input-name").val(), $("#input-comment").val(), latOfSlo, lngOfSlo);
+            $("body").addClass("progress");
+
+            var latOfSlo = 0;
+            var lngOfSlo = 0;
+            this._camera.upload($("#input-name").val(), $("#input-comment").val(), latOfSlo, lngOfSlo);
+
             //FOR TEST ONLY
-            this._camera.capture();
+            //            this._camera.capture();
             return false;
         };
         return EngageConferenceApp;
