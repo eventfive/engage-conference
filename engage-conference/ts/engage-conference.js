@@ -2676,7 +2676,7 @@ var engage;
             ft.upload(imageURI, encodeURI(url), null, function (r) {
                 return _this.handleUploadFailed(r);
             }, options);
-            e5.display.Toast.show({ message: "File ready..." });
+            //            e5.display.Toast.show({ message: "File ready..." });
         };
 
         CameraUtil.prototype.onProgress = function (e) {
