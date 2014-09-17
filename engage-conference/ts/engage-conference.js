@@ -2591,6 +2591,7 @@ var engage;
             this.onCaptureError = new e5.core.Signal();
             this.image = null;
             this.imageURI = null;
+            this._errorTimeout = 0;
             this._options = {};
             this._options.quality = 100;
             this._options.targetWidth = 1024;
@@ -2661,35 +2662,44 @@ var engage;
                 Connection: "close"
             };
 
+            clearTimeout(this._errorTimeout);
+            this._errorTimeout = setTimeout(function () {
+                return _this.handleUploadFailedByMaxTime();
+            }, 10000); //10 seconds
+
             var ft = new FileTransfer();
 
             //            ft.upload('', encodeURI(url), null, null, null);
             ft.onprogress = function (e) {
                 return _this.onProgress(e);
             };
-            ft.upload(imageURI, encodeURI(url), function (r) {
-                return _this.handleUploadSuccess(r);
-            }, function (r) {
+            ft.upload(imageURI, encodeURI(url), null, function (r) {
                 return _this.handleUploadFailed(r);
             }, options);
             e5.display.Toast.show({ message: "File ready..." });
         };
 
         CameraUtil.prototype.onProgress = function (e) {
-            e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total });
+            //e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total });
+            clearTimeout(this._errorTimeout);
+            if (e.loaded == e.total) {
+                this.handleUploadSuccess(null);
+            }
         };
 
         CameraUtil.prototype.handleUploadSuccess = function (r) {
-            var resp = JSON.parse(r.response);
-
             e5.display.Toast.show({ message: "Your image is successfully uploaded" });
-            e5.display.Toast.show({ message: resp.message, duration: 3000, allowClose: true });
             this.onUploadSuccess.dispatch();
         };
 
         CameraUtil.prototype.handleUploadFailed = function (r) {
             e5.display.Toast.show({ message: "Your image could not be uploaded", duration: 8000 });
             this.onUploadError.dispatch(this.imageURI, r.response);
+        };
+
+        CameraUtil.prototype.handleUploadFailedByMaxTime = function () {
+            e5.display.Toast.show({ message: "Your image could not be uploaded", duration: 8000 });
+            this.onUploadError.dispatch(this.imageURI, "");
         };
         return CameraUtil;
     })();
