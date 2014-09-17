@@ -2626,7 +2626,7 @@ var engage;
             var _this = this;
             this.onCaptureError.dispatch(this.imageURI, message);
 
-            e5.display.Toast.show({ message: "Try to capture again..." });
+            //            e5.display.Toast.show({ message: "Try to capture again..." });
             setTimeout(function () {
                 return _this.capture();
             }, 1000);

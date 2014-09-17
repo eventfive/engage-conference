@@ -70,6 +70,8 @@
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
+
+
 .e5-slider-button {
   position: absolute;
   right: 0px;
@@ -243,6 +245,8 @@
   margin: 0 auto;
 }
 
+
+
 .e5_slideshow_media {
   display: block;
   position: absolute;
@@ -348,6 +352,7 @@ body {
   background-image: url(../assets/base-background.png);
   background-size: cover;
   background-attachment: fixed;
+  margin-top: 20px;
 }
 
 #content {
