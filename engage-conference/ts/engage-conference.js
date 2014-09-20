@@ -2627,7 +2627,7 @@ var engage;
 
         CameraUtil.prototype.handleCaptureFailed = function (message) {
             var _this = this;
-            this.onCaptureError.dispatch(this.imageURI, message);
+            //this.onCaptureError.dispatch(this.imageURI, message);
             setTimeout(function () {
                 return _this.capture();
             }, 1000);
@@ -2665,11 +2665,11 @@ var engage;
                 return _this.handleUploadFailedByMaxTime();
             }, 10000); //10 seconds
 
-            var ft = new FileTransfer();
-            ft.onprogress = function (e) {
+            this._currentTransfer = new FileTransfer();
+            this._currentTransfer.onprogress = function (e) {
                 return _this.onProgress(e);
             };
-            ft.upload(imageURI, encodeURI(url), null, null, options);
+            this._currentTransfer.upload(imageURI, encodeURI(url), null, null, options);
         };
 
         CameraUtil.prototype.onProgress = function (e) {
@@ -2677,10 +2677,14 @@ var engage;
             clearTimeout(this._errorTimeout);
             if (e.lengthComputable) {
                 if (e.total <= (e.loaded + 250)) {
+                    if (this._currentTransfer)
+                        this._currentTransfer.onprogress = null;
                     this.handleUploadSuccess(null);
                 }
             } else {
                 if (e.loaded > 0) {
+                    if (this._currentTransfer)
+                        this._currentTransfer.onprogress = null;
                     this.handleUploadSuccess(null);
                 }
             }
@@ -2748,7 +2752,6 @@ var engage;
         }
         EngageConferenceApp.prototype.cancel = function () {
             if (this._camera.capture()) {
-                console.log("AHHHH");
                 $("#input-name").val("");
                 $("#input-comment").val("");
                 $("body").removeClass("progress");
