@@ -2605,7 +2605,7 @@ var engage;
             var _this = this;
             if (!navigator.camera) {
                 e5.display.Toast.show({ message: "Camera not found", key: "camera_not_found" });
-                return;
+                return false;
             }
 
             this._options.sourceType = navigator.camera.PictureSourceType.CAMERA;
@@ -2617,6 +2617,7 @@ var engage;
             }, function (msg) {
                 return _this.handleCaptureFailed(msg);
             }, this._options);
+            return true;
         };
 
         CameraUtil.prototype.handleCaptureSuccess = function (imageURI) {
@@ -2672,10 +2673,10 @@ var engage;
         };
 
         CameraUtil.prototype.onProgress = function (e) {
-            e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total + " " + e.lengthComputable, duration: 1000 });
+            //e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total + " " + e.lengthComputable, duration: 1000 });
             clearTimeout(this._errorTimeout);
             if (e.lengthComputable) {
-                if (e.total <= e.loaded) {
+                if (e.total <= (e.loaded + 250)) {
                     this.handleUploadSuccess(null);
                 }
             } else {
@@ -2746,10 +2747,12 @@ var engage;
             });
         }
         EngageConferenceApp.prototype.cancel = function () {
-            $("#input-name").val("");
-            $("#input-comment").val("");
-            $("body").removeClass("progress");
-            this._camera.capture();
+            if (this._camera.capture()) {
+                console.log("AHHHH");
+                $("#input-name").val("");
+                $("#input-comment").val("");
+                $("body").removeClass("progress");
+            }
         };
 
         EngageConferenceApp.prototype.handleCaptureSuccess = function () {

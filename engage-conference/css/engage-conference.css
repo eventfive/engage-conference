@@ -70,8 +70,6 @@
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-
-
 .e5-slider-button {
   position: absolute;
   right: 0px;
@@ -245,8 +243,6 @@
   margin: 0 auto;
 }
 
-
-
 .e5_slideshow_media {
   display: block;
   position: absolute;
@@ -355,9 +351,13 @@ body {
   margin-top: 20px;
 }
 
-* {
+#content * {
   font-size: 40px;
   font-family: Helvetica;
+}
+
+.e5_toast {
+  font-size: 34px;
 }
 
 #logo {
@@ -394,7 +394,7 @@ body {
 
 
 #input-comment {
-  min-height: 300px;
+  min-height: 240px;
 }
 
 #button-submit,
@@ -410,6 +410,7 @@ body {
   padding: 10px;
   font-weight: bold;
   width: 100%;
+  text-align: center;
 }
 
 body.progress {
