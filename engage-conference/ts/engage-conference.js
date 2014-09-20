@@ -2675,7 +2675,7 @@ var engage;
             e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total, duration: 500 });
             clearTimeout(this._errorTimeout);
             if (e.lengthComputable) {
-                if (e.total - e.loaded <= 100) {
+                if (e.total <= e.loaded) {
                     this.handleUploadSuccess(null);
                 }
             } else {
