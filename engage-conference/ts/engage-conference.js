@@ -2672,7 +2672,7 @@ var engage;
         };
 
         CameraUtil.prototype.onProgress = function (e) {
-            e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total + " " + e.lengthComputable, duration: 5 });
+            e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total + " " + e.lengthComputable, duration: 1000 });
             clearTimeout(this._errorTimeout);
             if (e.lengthComputable) {
                 if (e.total <= e.loaded) {
