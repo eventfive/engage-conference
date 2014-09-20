@@ -2674,8 +2674,14 @@ var engage;
         CameraUtil.prototype.onProgress = function (e) {
             //e5.display.Toast.show({ message: "Progress: " + e.loaded + " " + e.total });
             clearTimeout(this._errorTimeout);
-            if (e.loaded == e.total) {
-                this.handleUploadSuccess(null);
+            if (e.lengthComputable) {
+                if (e.loaded == e.total) {
+                    this.handleUploadSuccess(null);
+                }
+            } else {
+                if (e.loaded > 0) {
+                    this.handleUploadSuccess(null);
+                }
             }
         };
 
