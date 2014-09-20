@@ -2641,7 +2641,7 @@ var engage;
             //"/eventfive/web/engage-app/php/upload.php"
             //"http://192.168.1.26/eventfive/web/engage-app/php/upload.php"
             //"http://engage-interreg.eu/engage-app/upload.php";
-            var url = "http://192.168.1.26/eventfive/web/engage-app/php/upload.php";
+            var url = "http://engage-interreg.eu/engage-app/upload.php";//"http://192.168.1.26/eventfive/web/engage-app/php/upload.php";
             var imageURI = this.imageURI;
 
             var params = new Object();
