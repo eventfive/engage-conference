@@ -2686,11 +2686,11 @@ var engage;
         };
 
         CameraUtil.prototype.handleUploadSuccess = function (r) {
-            e5.display.Toast.show({ message: "Your image is successfully uploaded" });
-
             //just dispatch success ONE time per upload
-            if (!this._finished)
+            if (!this._finished) {
+                e5.display.Toast.show({ message: "Your image is successfully uploaded" });
                 this.onUploadSuccess.dispatch();
+            }
             this._finished = true;
         };
 
