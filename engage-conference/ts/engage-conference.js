@@ -2482,8 +2482,7 @@ var e5;
                 if (setting.styleClass)
                     this.element.addClass(setting.styleClass);
 
-                this.element.css("margin-left", -Math.round(this.element.outerWidth(false) * 0.5) + "px");
-
+                //            this.element.css("margin-left", -Math.round(this.element.outerWidth(false) * 0.5) + "px");
                 var dur = setting.duration ? setting.duration : 3000;
                 this._timeoutId = setTimeout(function () {
                     return _this.hide();
@@ -2604,7 +2603,7 @@ var engage;
         CameraUtil.prototype.capture = function () {
             var _this = this;
             if (!navigator.camera) {
-                e5.display.Toast.show({ message: "Camera not found", key: "camera_not_found" });
+                e5.display.Toast.show({ message: "Camera not found + " + Math.random(), key: "camera_not_found" });
                 return false;
             }
 
