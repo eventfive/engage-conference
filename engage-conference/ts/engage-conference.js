@@ -2592,6 +2592,7 @@ var engage;
             this.image = null;
             this.imageURI = null;
             this._errorTimeout = 0;
+            this._finished = false;
             this._options = {};
             this._options.quality = 100;
             this._options.targetWidth = 1024;
@@ -2626,22 +2627,20 @@ var engage;
         CameraUtil.prototype.handleCaptureFailed = function (message) {
             var _this = this;
             this.onCaptureError.dispatch(this.imageURI, message);
-
-            //            e5.display.Toast.show({ message: "Try to capture again..." });
             setTimeout(function () {
                 return _this.capture();
             }, 1000);
-            //this.capture();
         };
 
         CameraUtil.prototype.upload = function (name, comment, latitude, longitude) {
             var _this = this;
             e5.display.Toast.show({ message: "Upload data... please wait", duration: 2000 });
+            this._finished = false;
 
             //"/eventfive/web/engage-app/php/upload.php"
             //"http://192.168.1.26/eventfive/web/engage-app/php/upload.php"
             //"http://engage-interreg.eu/engage-app/upload.php";
-            var url = "http://engage-interreg.eu/engage-app/upload.php";//"http://192.168.1.26/eventfive/web/engage-app/php/upload.php";
+            var url = "http://engage-interreg.eu/engage-app/upload.php";
             var imageURI = this.imageURI;
 
             var params = new Object();
@@ -2650,8 +2649,6 @@ var engage;
             params.latitude = latitude;
             params.longitude = longitude;
 
-            //            alert(FileUploadOptions);
-            //            return;
             var options = new FileUploadOptions();
             options.params = params;
             options.fileKey = "file";
@@ -2668,15 +2665,10 @@ var engage;
             }, 10000); //10 seconds
 
             var ft = new FileTransfer();
-
-            //            ft.upload('', encodeURI(url), null, null, null);
             ft.onprogress = function (e) {
                 return _this.onProgress(e);
             };
-            ft.upload(imageURI, encodeURI(url), null, function (r) {
-                return _this.handleUploadFailed(r);
-            }, options);
-            //            e5.display.Toast.show({ message: "File ready..." });
+            ft.upload(imageURI, encodeURI(url), null, null, options);
         };
 
         CameraUtil.prototype.onProgress = function (e) {
@@ -2689,17 +2681,25 @@ var engage;
 
         CameraUtil.prototype.handleUploadSuccess = function (r) {
             e5.display.Toast.show({ message: "Your image is successfully uploaded" });
-            this.onUploadSuccess.dispatch();
+
+            //just dispatch success ONE time per upload
+            if (!this._finished)
+                this.onUploadSuccess.dispatch();
+            this._finished = true;
         };
 
-        CameraUtil.prototype.handleUploadFailed = function (r) {
-            e5.display.Toast.show({ message: "Your image could not be uploaded", duration: 8000 });
-            this.onUploadError.dispatch(this.imageURI, r.response);
-        };
-
+        //        private handleUploadFailed(r) {
+        //            this._finished = true;
+        //            e5.display.Toast.show({ message: "Your image could not be uploaded", duration: 8000 });
+        //            this.onUploadError.dispatch(this.imageURI, r.response);
+        //        }
         CameraUtil.prototype.handleUploadFailedByMaxTime = function () {
             e5.display.Toast.show({ message: "Your image could not be uploaded", duration: 8000 });
-            this.onUploadError.dispatch(this.imageURI, "");
+
+            //just dispatch error ONE time per upload
+            if (!this._finished)
+                this.onUploadError.dispatch(this.imageURI, "");
+            this._finished = true;
         };
         return CameraUtil;
     })();
